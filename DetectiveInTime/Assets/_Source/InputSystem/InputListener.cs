@@ -1,4 +1,5 @@
 using System;
+using InventorySystem;
 using PlayerSystem;
 using UnityEngine;
 
@@ -8,11 +9,15 @@ namespace InputSystem
     {
         [SerializeField] private Player player;
         private PlayerInvoker _playerInvoker;
+        [SerializeField] private PlayerCollisionDetector playerCollisionDetector;
         private const string Horizontal = "Horizontal";
         private const string Vertical = "Vertical";
         private void Awake()
         {
             _playerInvoker = new PlayerInvoker(player);
+            playerCollisionDetector.Initialize(
+            _playerInvoker,
+            player.ItemLayerMask);
         }
 
         private void Update()
