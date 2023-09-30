@@ -9,12 +9,17 @@ namespace InventorySystem
     public class InventoryUI : MonoBehaviour
     {
         [SerializeField] private Inventory inventory;
-        [SerializeField] private RectTransform itemsPanel;
+        [SerializeField] private RectTransform[] itemsPanels;
+        [SerializeField] private Sprite inventorySprite;
         private List<GameObject> _drawnItems = new List<GameObject>(); 
         private void Start()
         {
             inventory.OnItemAdded += OnItemAdded;
             Redraw();
+            foreach (var i in itemsPanels)
+            {
+                i.gameObject.AddComponent<Image>().sprite = inventorySprite;
+            }
         }
 
         void OnItemAdded(Item obj) => Redraw();
@@ -27,7 +32,7 @@ namespace InventorySystem
                 var item = inventory.InventoryItems[i];
                 var icon = new GameObject("Icon");
                 icon.AddComponent<Image>().sprite = item.ItemIcon;
-                icon.transform.SetParent(itemsPanel);
+                icon.transform.SetParent(itemsPanels[i]);
                 _drawnItems.Add(icon);
             }
         }

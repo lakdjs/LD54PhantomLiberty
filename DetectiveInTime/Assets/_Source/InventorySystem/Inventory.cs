@@ -8,6 +8,7 @@ namespace InventorySystem
     {
         public Action<Item> OnItemAdded;
         [SerializeField] private List<Item> startItems = new List<Item>();
+        [SerializeField] private int maxInventorySize;
         public List<Item> InventoryItems { get; private set; } = new List<Item>();
 
         private void Start()
@@ -20,8 +21,11 @@ namespace InventorySystem
 
         public void AddItemInInventory(Item item)
         {
-            InventoryItems.Add(item);
-            OnItemAdded?.Invoke(item);
+            if (InventoryItems.Count <= maxInventorySize-1)
+            {
+                InventoryItems.Add(item);
+                OnItemAdded?.Invoke(item);
+            }
         }
     }
 }
