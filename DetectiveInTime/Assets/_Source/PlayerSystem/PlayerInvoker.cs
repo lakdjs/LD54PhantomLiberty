@@ -9,6 +9,7 @@ namespace PlayerSystem
         private Player _player;
         private ItemPickUp _itemPickUp;
         private Inventory _inventory;
+        private Animator _animator;
         public PlayerInvoker(Player player)
         {
             _player = player;
@@ -19,7 +20,7 @@ namespace PlayerSystem
 
         public void Move(Vector2 moveDir)
         {
-            _playerMovement.Move(_player.Rb,_player.MovementSpeed,moveDir);
+            _playerMovement.Move(_player.Rb, _player.MovementSpeed, moveDir);
         }
 
         public void PickUp(Item item)

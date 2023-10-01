@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1682154966874414322}
   - component: {fileID: 1682154966874414317}
   - component: {fileID: 1682154966874414321}
-  - component: {fileID: 1682154966874414326}
   - component: {fileID: 1682154966874414327}
   m_Layer: 3
   m_Name: Player
@@ -142,22 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startItems: []
   maxInventorySize: 5
---- !u!58 &1682154966874414326
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1682154966874414316}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  player: {fileID: 0}
 --- !u!114 &1682154966874414327
 MonoBehaviour:
   m_ObjectHideFlags: 0
