@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Gun
   m_EditorClassIdentifier: 
   itemName: Gun
-  <ItemIcon>k__BackingField: {fileID: 0}
-  <PickUpCode>k__BackingField: 0
+  <ItemIcon>k__BackingField: {fileID: 21300000, guid: 9125c204f566db048a92ebcb64d9d14a, type: 3}
+  <PickUpCode>k__BackingField: 101

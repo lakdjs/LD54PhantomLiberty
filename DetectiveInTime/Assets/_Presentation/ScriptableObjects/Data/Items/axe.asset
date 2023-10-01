@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: axe
   m_EditorClassIdentifier: 
   itemName: Axe
-  <ItemIcon>k__BackingField: {fileID: 21300000, guid: e6fe7bda78bd09a46bb7f4a684a91927, type: 3}
-  <PickUpCode>k__BackingField: 103
+  <ItemIcon>k__BackingField: {fileID: 21300000, guid: 2b072f285a732f747b9be104aae155b2, type: 3}
+  <PickUpCode>k__BackingField: 101
