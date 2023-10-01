@@ -26,5 +26,10 @@ namespace PlayerSystem
         {
             _itemPickUp.PickUp(item,_inventory);
         }
+
+        public void Drop(Item item)
+        {
+            _itemPickUp.Drop(item,_inventory);
+        }
     }
 }

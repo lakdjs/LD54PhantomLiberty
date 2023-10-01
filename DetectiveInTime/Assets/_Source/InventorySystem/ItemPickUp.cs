@@ -8,5 +8,10 @@ namespace InventorySystem
         {
             inventory.AddItemInInventory(item);
         }
+
+        public void Drop(Item item, Inventory inventory)
+        {
+            inventory.DeleteItemFromInventory(item);
+        }
     }
 }

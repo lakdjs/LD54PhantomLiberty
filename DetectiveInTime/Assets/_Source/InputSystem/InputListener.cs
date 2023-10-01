@@ -8,8 +8,8 @@ namespace InputSystem
     public class InputListener : MonoBehaviour
     {
         [SerializeField] private Player player;
-        private PlayerInvoker _playerInvoker;
         [SerializeField] private PlayerCollisionDetector playerCollisionDetector;
+        private PlayerInvoker _playerInvoker;
         private const string Horizontal = "Horizontal";
         private const string Vertical = "Vertical";
         private void Awake()
@@ -29,7 +29,7 @@ namespace InputSystem
         {
             float horizontal = Input.GetAxis(Horizontal);
             float vertical = Input.GetAxis(Vertical);
-            Vector3 moveDirection = new Vector3(horizontal, vertical, 0f );
+            Vector2 moveDirection = new Vector3(horizontal, vertical );
             _playerInvoker.Move(moveDirection);
         }
     }

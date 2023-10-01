@@ -15,6 +15,7 @@ namespace InventorySystem
         private void Start()
         {
             inventory.OnItemAdded += OnItemAdded;
+            inventory.OnItemDeleted += OnItemAdded;
             Redraw();
             foreach (var i in itemsPanels)
             {
@@ -23,6 +24,7 @@ namespace InventorySystem
         }
 
         void OnItemAdded(Item obj) => Redraw();
+        void OnItemDeleted(Item obj) => Redraw();
 
         void Redraw()
         {
