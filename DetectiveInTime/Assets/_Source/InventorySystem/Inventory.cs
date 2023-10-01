@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PlayerSystem;
 using UnityEngine;
 
 namespace InventorySystem
@@ -10,6 +11,7 @@ namespace InventorySystem
         public Action<Item> OnItemDeleted;
         [SerializeField] private List<Item> startItems = new List<Item>();
         [SerializeField] private int maxInventorySize;
+        [SerializeField] private Player player;
         public List<Item> InventoryItems { get; private set; } = new List<Item>();
 
         private void Start()

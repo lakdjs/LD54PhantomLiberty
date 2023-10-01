@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using InventorySystem;
 using UnityEngine;
 
@@ -8,7 +9,8 @@ namespace PlayerSystem
         private PlayerInvoker _playerInvoker;
         private LayerMask _itemLayerMask;
         private Item _col;
-
+        private GameObject _colObj;
+        private List<GameObject> _colObjs = new List<GameObject>();
         private void Update()
         {
             PickingUp();
@@ -21,6 +23,8 @@ namespace PlayerSystem
                 if (Input.GetKeyDown(_col.PickUpCode))
                 {
                     _playerInvoker.PickUp(_col);
+                    _colObjs.Add(_colObj);
+                    Destroy(_colObj);
                 }
             }
         }
@@ -37,6 +41,7 @@ namespace PlayerSystem
             if (item)
             {
                 _col = item;
+                _colObj = other.gameObject;
             }
         }
         private void OnTriggerExit2D(Collider2D other)
@@ -45,6 +50,7 @@ namespace PlayerSystem
             if (item)
             {
                 _col = null;
+                _colObj = null;
             }
         }
     }
