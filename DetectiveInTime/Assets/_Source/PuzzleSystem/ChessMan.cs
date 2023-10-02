@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PlayerSystem;
+using PuzzleSystem;
 using UnityEngine;
 
 public class ChessMan : MonoBehaviour
@@ -13,6 +15,7 @@ public class ChessMan : MonoBehaviour
     private int _xBoard = -1;
     private int _yBoard = -1;
 
+    private string player;
     public void Activate()
     {
         controller = GameObject.FindGameObjectWithTag(ChessControllerTag);
@@ -114,7 +117,7 @@ public class ChessMan : MonoBehaviour
                 break;
             case "black_knight":
             case "white_knight":
-               // LMovePlate();
+               LMovePlate();
                 break;
             case "black_bishop":
             case "white_bishop":
@@ -125,7 +128,7 @@ public class ChessMan : MonoBehaviour
                 break;
             case "black_king":
             case "white_king":
-                //SurroundMovePlate();
+                SurroundMovePlate();
                 break;
             case "black_rook":
             case "white_rook":
@@ -135,13 +138,127 @@ public class ChessMan : MonoBehaviour
                 LineMovePlate(-1, 0);
                 break;
             case "white_pawn":
-                //PawnMovePlate(_xBoard, _yBoard + 1);
+                PawnMovePlate(_xBoard, _yBoard + 1);
                 break;
         }
     }
 
     public void LineMovePlate(int xIncr, int yIncr)
     {
-        
+        GameChess sc = controller.GetComponent<GameChess>();
+
+        int x = _xBoard + xIncr;
+        int y = _yBoard + yIncr;
+
+        while (sc.PositionOnBoard(x,y) && sc.GetPosition(x,y)==null)
+        {
+            MovePlateSpawn(x, y);
+            x += xIncr;
+            y += yIncr;
+        }
+
+        if (sc.PositionOnBoard(x, y) && sc.GetPosition(x, y).GetComponent<ChessMan>().player != player)
+        {
+            MovePlateAttackSpawn(x, y);
+        }
+    }
+
+    public void LMovePlate()
+    {
+        PointMovePlate(_xBoard + 1, _yBoard + 2);
+        PointMovePlate(_xBoard - 1, _yBoard + 2);
+        PointMovePlate(_xBoard + 2, _yBoard + 1);
+        PointMovePlate(_xBoard + 2, _yBoard - 1);
+        PointMovePlate(_xBoard + 1, _yBoard - 2);
+        PointMovePlate(_xBoard - 1, _yBoard - 2);
+        PointMovePlate(_xBoard - 2, _yBoard + 1);
+        PointMovePlate(_xBoard - 2, _yBoard - 1);
+    }
+
+    public void SurroundMovePlate()
+    {
+        PointMovePlate(_xBoard, _yBoard + 1);
+        PointMovePlate(_xBoard, _yBoard - 1);
+        PointMovePlate(_xBoard - 1, _yBoard - 1);
+        PointMovePlate(_xBoard - 1, _yBoard - 0);
+        PointMovePlate(_xBoard - 1, _yBoard + 1);
+        PointMovePlate(_xBoard + 1, _yBoard - 1);
+        PointMovePlate(_xBoard + 1, _yBoard - 0);
+        PointMovePlate(_xBoard + 1, _yBoard + 1);
+    }
+
+    public void PointMovePlate(int x, int y)
+    {
+        GameChess sc = controller.GetComponent<GameChess>();
+        if (sc.PositionOnBoard(x, y))
+        {
+            GameObject cp = sc.GetPosition(x, y);
+            if (cp == null)
+            {
+                MovePlateSpawn(x,y);
+            }
+            else if (cp.GetComponent<ChessMan>().player != player)
+            {
+                MovePlateAttackSpawn(x,y);
+            }
+        }
+    }
+
+    public void PawnMovePlate(int x, int y)
+    {
+        GameChess sc = controller.GetComponent<GameChess>();
+        if (sc.PositionOnBoard(x, y))
+        {
+            MovePlateSpawn(x,y);
+        }
+
+        if (sc.PositionOnBoard(x + 1, y) &&
+            sc.GetPosition(x + 1, y) != null &&
+            sc.GetPosition(x + 1, y).GetComponent<ChessMan>().player != player)
+        {
+            MovePlateAttackSpawn(x + 1, y);
+        }
+        if (sc.PositionOnBoard(x - 1, y) &&
+            sc.GetPosition(x - 1, y) != null &&
+            sc.GetPosition(x - 1, y).GetComponent<ChessMan>().player != player)
+        {
+            MovePlateAttackSpawn(x - 1, y);
+        }
+    }
+
+    public void MovePlateSpawn(int matrixX, int matrixY)
+    {
+        float x = matrixX;
+        float y = matrixY;
+
+       x *= 0.66f;
+       y *= 0.66f;
+//
+       x += -2.35f;
+       y += -2.4f;
+
+        GameObject mp = Instantiate(movePlate, new Vector3(x , y , -3.0f), Quaternion.identity);
+
+        MovePlate mpScript = mp.GetComponent<MovePlate>();
+        mpScript.SetReference(gameObject);
+        mpScript.SetCoordinations(matrixX,matrixY);
+    }
+    public void MovePlateAttackSpawn(int matrixX, int matrixY)
+    {
+        float x = matrixX;
+        float y = matrixY;
+
+        x *= 0.66f;
+        y *= 0.66f;
+
+        x += -2.35f;
+        y += -2.4f;
+
+        GameObject mp = Instantiate(movePlate, new Vector3(x , y , -3.0f), Quaternion.identity);
+
+        MovePlate mpScript = mp.GetComponent<MovePlate>();
+        mpScript.attack = true;
+        mpScript.SetReference(gameObject);
+        mpScript.SetCoordinations(matrixX,matrixY);
     }
 }
