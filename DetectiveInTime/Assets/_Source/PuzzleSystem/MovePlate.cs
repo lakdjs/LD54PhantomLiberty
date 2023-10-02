@@ -8,8 +8,8 @@ namespace PuzzleSystem
         
         private GameObject _reference = null;
         
-        int matrixX;
-        int matrixY;
+        private int _matrixX;
+        private int _matrixY;
         
         public bool attack = false;
 
@@ -23,22 +23,23 @@ namespace PuzzleSystem
 
         public void OnMouseUp()
         {
-            _controller = GameObject.FindGameObjectWithTag("ChessController");
+            _controller = GameObject.FindGameObjectWithTag("GameController");
 
             GameChess gameChess = _controller.GetComponent<GameChess>();
             if (attack)
             {
-                GameObject cp = gameChess.GetPosition(matrixX, matrixY);
+                GameObject cp = gameChess.GetPosition(_matrixX, _matrixY);
 
                 Destroy(cp);
             }
+
             ChessMan chessMan = _reference.GetComponent<ChessMan>();
             gameChess.SetPositionEmpty(chessMan.GetXBoard(), 
                 chessMan.GetYBoard());
             
-            chessMan.SetXBoard(matrixX);
-            chessMan.SetYBoard(matrixY);
-            chessMan.SetCoordinates();
+            chessMan.SetXBoard(_matrixX);
+            chessMan.SetYBoard(_matrixY);
+            chessMan.SetCoords();
             
             gameChess.SetPosition(_reference);
             
@@ -47,8 +48,8 @@ namespace PuzzleSystem
 
         public void SetCoords(int x, int y)
         {
-            matrixX = x;
-            matrixY = y;
+            _matrixX = x;
+            _matrixY = y;
         }
 
         public void SetReference(GameObject obj)
