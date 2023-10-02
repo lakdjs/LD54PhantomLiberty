@@ -14,6 +14,14 @@ namespace InventorySystem
         [SerializeField] private Player player;
         public List<Item> InventoryItems { get; private set; } = new List<Item>();
 
+        private void Update()
+        {
+            foreach (Item item in InventoryItems)
+            {
+                Debug.Log(item.ToString());
+            }
+        }
+
         private void Start()
         {
             foreach (var item in startItems)
@@ -30,7 +38,6 @@ namespace InventorySystem
                 OnItemAdded?.Invoke(item);
             }
         }
-
         public void DeleteItemFromInventory(Item item)
         {
             InventoryItems.Remove(item);
