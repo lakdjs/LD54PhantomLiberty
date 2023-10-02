@@ -7,7 +7,7 @@ namespace PlayerSystem
     public class PlayerCollisionDetector : MonoBehaviour
     {
         private PlayerInvoker _playerInvoker;
-        private LayerMask _itemLayerMask;
+        [SerializeField] private LayerMask _itemLayerMask;
         private Item _col;
         private GameObject _colObj;
         private List<GameObject> _colObjs = new List<GameObject>();
@@ -37,20 +37,26 @@ namespace PlayerSystem
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            var item = other.gameObject.GetComponent<ItemInitialize>().item;
-            if (item)
+            if ((_itemLayerMask & (1 << other.gameObject.layer)) != 0)
             {
-                _col = item;
-                _colObj = other.gameObject;
+                var item = other.gameObject.GetComponent<ItemInitialize>().item;
+                if (item)
+                {
+                    _col = item;
+                    _colObj = other.gameObject;
+                }
             }
         }
         private void OnTriggerExit2D(Collider2D other)
         {
-            var item = other.gameObject.GetComponent<ItemInitialize>().item;
-            if (item)
+            if ((_itemLayerMask & (1 << other.gameObject.layer)) != 0)
             {
-                _col = null;
-                _colObj = null;
+                var item = other.gameObject.GetComponent<ItemInitialize>().item;
+                if (item)
+                {
+                    _col = null;
+                    _colObj = null;
+                }
             }
         }
     }

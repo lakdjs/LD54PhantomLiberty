@@ -10,7 +10,7 @@ namespace PuzzleClosetSystem
 
         private void Start()
         {
-            this._onClosetClick += OnClickAdd;
+            _onClosetClick += OnClickAdd;
         }
 
         void OnClickAdd(int i) => OpenTheDoor();
