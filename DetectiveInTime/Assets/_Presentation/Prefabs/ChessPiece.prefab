@@ -124,7 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b244a179364effa4e8b91a594771b527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
   movePlate: {fileID: 1268583437843327711, guid: 9fd4c0566fd58524994649665f8c76e1, type: 3}
   black_queen: {fileID: 21300000, guid: fa10f5200f6a1e54aa3a844bd58f1eef, type: 3}
   black_knight: {fileID: 21300000, guid: f283f969d9835214abbbe0db2b3bd74b, type: 3}
