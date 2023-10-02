@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PuzzleSystem
@@ -15,9 +17,23 @@ namespace PuzzleSystem
         [SerializeField] private Sprite black_queen, black_knight, black_bishop, black_king, black_rook, black_pawn;
         [SerializeField] private Sprite white_queen, white_knight, white_bishop, white_king, white_rook, white_pawn;
 
-        public void Activate()
+        private void Start()
         {
             _controller = GameObject.FindGameObjectWithTag("GameController");
+            _controller.GetComponent<GameChess>().OnGameStarted += OnGameStarted;
+        }
+
+        void OnGameStarted(GameObject obj) => Destroying();
+        public void Destroying()
+        {
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+            }
+        }
+        public void Activate()
+        {
+           // _controller = GameObject.FindGameObjectWithTag("GameController");
             
             SetCoords();
             
