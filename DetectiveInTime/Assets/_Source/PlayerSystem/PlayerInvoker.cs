@@ -9,7 +9,6 @@ namespace PlayerSystem
         private Player _player;
         private ItemPickUp _itemPickUp;
         private Inventory _inventory;
-        private Animator _animator;
         public PlayerInvoker(Player player)
         {
             _player = player;
@@ -21,6 +20,14 @@ namespace PlayerSystem
         public void Move(Vector2 moveDir)
         {
             _playerMovement.Move(_player.Rb, _player.MovementSpeed, moveDir);
+            if (moveDir.x > 0)
+            {
+                _player.transform.localScale = new Vector3(-Mathf.Abs(_player.transform.localScale.x), _player.transform.localScale.y, _player.transform.localScale.z);
+            }
+            else if (moveDir.x < 0)
+            {
+                _player.transform.localScale = new Vector3(Mathf.Abs(_player.transform.localScale.x), _player.transform.localScale.y, _player.transform.localScale.z);
+            }
         }
 
         public void PickUp(Item item)
