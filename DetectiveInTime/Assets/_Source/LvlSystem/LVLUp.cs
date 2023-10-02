@@ -11,7 +11,7 @@ public class LVLUp : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private int demandEvidenceQuantity;
     [SerializeField] private int demandKeysQuantity;
-    [SerializeField] private Transform teleportToPosition;
+    [field: SerializeField] public Transform teleportToPosition { get; set; }
     private bool _isReadyForLvl;
 
     private void Start()
@@ -31,12 +31,12 @@ public class LVLUp : MonoBehaviour
         }
     }
 
-    public void CheckForReady()
+    public bool CheckForReady()
     {
         int realKeysQuantity = 0;
         foreach (Item item in inventory.InventoryItems)
         {
-            if (item.ItemName == "Key")
+            if (item.ToString() == "Key")
             {
                 realKeysQuantity++;
             }
@@ -47,5 +47,7 @@ public class LVLUp : MonoBehaviour
         {
             _isReadyForLvl = true;
         }
+
+        return _isReadyForLvl;
     }
 }
