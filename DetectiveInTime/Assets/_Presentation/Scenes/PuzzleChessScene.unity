@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 307267004}
   m_Layer: 9
   m_Name: Controller
-  m_TagString: ChessController
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13fb12568e8937941bdab6c0b0ae95aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _chesspiece: {fileID: 3787443310155923708, guid: 0e5aa6d9eaef48e4394137b5417a26d3, type: 3}
 --- !u!4 &307267005
 Transform:
   m_ObjectHideFlags: 0
@@ -385,7 +386,7 @@ SpriteRenderer:
   m_Size: {x: 10.69, y: 10.68}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &989752772

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using InventorySystem;
 using UnityEngine;
-
+using InventorySystem;
 namespace PlayerSystem
 {
     public class PlayerCollisionDetector : MonoBehaviour
@@ -10,6 +10,7 @@ namespace PlayerSystem
         [SerializeField] private LayerMask _itemLayerMask;
         [SerializeField] private LayerMask _evidenceMask;
         [SerializeField] private LayerMask _doorLvlMask;
+        [SerializeField] private Inventory inventory;
         private PlayerInvoker _playerInvoker;
         private Item _col;
         private GameObject _colObj;
@@ -42,7 +43,6 @@ namespace PlayerSystem
             if (other.name == "Evidence")//(_evidenceMask & (1 << other.gameObject.layer)) != 0)
             {
                 Destroy(other.gameObject);
-
                 gameObject.GetComponent<Evidence>().AddEvidence();
                 Debug.Log(gameObject.GetComponent<Evidence>().QuantityOfEvidence);
             }
@@ -53,6 +53,14 @@ namespace PlayerSystem
                 if (isready)
                 {
                     gameObject.transform.position = other.GetComponent<LVLUp>().teleportToPosition.position;
+                    foreach (Item item in inventory.InventoryItems)
+                    {
+                        if (item.ToString() == "Key")
+                        {
+                            inventory.DeleteItemFromInventory(item);
+                            return;
+                        }
+                    }
                 }
             }
         }
