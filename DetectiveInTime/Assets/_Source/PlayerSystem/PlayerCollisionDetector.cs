@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using InventorySystem;
 using UnityEngine;
@@ -7,7 +8,9 @@ namespace PlayerSystem
     public class PlayerCollisionDetector : MonoBehaviour
     {
         private PlayerInvoker _playerInvoker;
-        private LayerMask _itemLayerMask;
+        [SerializeField] private LayerMask _itemLayerMask;
+        [SerializeField] private LayerMask _evidenceMask;
+        [SerializeField] private LayerMask _doorLvlMask;
         private Item _col;
         private GameObject _colObj;
         private List<GameObject> _colObjs = new List<GameObject>();
@@ -22,7 +25,7 @@ namespace PlayerSystem
             {
                 if (Input.GetKeyDown(_col.PickUpCode))
                 {
-                    _playerInvoker.PickUp(_col);
+                    _playerInvoker.PickUp(_col,_col.ItemName);
                     _colObjs.Add(_colObj);
                     Destroy(_colObj);
                 }
@@ -35,22 +38,52 @@ namespace PlayerSystem
             _itemLayerMask = itemLayerMask;
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.name == "Evidence")
+            {
+                Destroy(other.gameObject);
+                
+                gameObject.GetComponent<Evidence>().AddEvidence();
+                Debug.Log(gameObject.GetComponent<Evidence>().QuantityOfEvidence);
+            }
+
+            if  ((_doorLvlMask & (1 << other.gameObject.layer)) != 0)
+            {
+                bool isready = other.GetComponent<LVLUp>().CheckForReady();
+                if (isready)
+                {
+                    gameObject.transform.position = other.GetComponent<LVLUp>().teleportToPosition.position;
+                }
+            }
+        }
+
         private void OnTriggerStay2D(Collider2D other)
         {
-            var item = other.gameObject.GetComponent<ItemInitialize>().item;
-            if (item)
+            if ((_itemLayerMask & (1 << other.gameObject.layer)) != 0)
             {
-                _col = item;
-                _colObj = other.gameObject;
+                Item item = other.gameObject.GetComponent<ItemInitialize>().item;
+                item.ItemName = other.GetComponent<ItemInitialize>().item.ItemName; 
+                if (item)
+                {
+                    _col = item;
+                    _col.ItemName = item.ItemName;
+                    _colObj = other.gameObject;
+                }
             }
+
+          
         }
         private void OnTriggerExit2D(Collider2D other)
         {
-            var item = other.gameObject.GetComponent<ItemInitialize>().item;
-            if (item)
+            if ((_itemLayerMask & (1 << other.gameObject.layer)) != 0)
             {
-                _col = null;
-                _colObj = null;
+                Item item = other.gameObject.GetComponent<ItemInitialize>().item;
+                if (item)
+                {
+                    _col = null;
+                    _colObj = null;
+                }
             }
         }
     }
