@@ -12,6 +12,7 @@ namespace InputSystem
         private PlayerInvoker _playerInvoker;
         private const string Horizontal = "Horizontal";
         private const string Vertical = "Vertical";
+        public Animator animator;
         private void Awake()
         {
             _playerInvoker = new PlayerInvoker(player);
@@ -31,6 +32,7 @@ namespace InputSystem
             float vertical = Input.GetAxis(Vertical);
             Vector2 moveDirection = new Vector3(horizontal, vertical );
             _playerInvoker.Move(moveDirection);
+            animator.SetBool("isWalking", moveDirection.magnitude >= 0.4);
         }
     }
 }
