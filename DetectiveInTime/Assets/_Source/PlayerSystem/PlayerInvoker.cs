@@ -30,9 +30,10 @@ namespace PlayerSystem
             }
         }
 
-        public void PickUp(Item item)
+        public void PickUp(Item item,string name)
         {
-            _itemPickUp.PickUp(item,_inventory);
+            _itemPickUp.PickUp(item,_inventory,name);
+            
         }
 
         public void Drop(Item item)

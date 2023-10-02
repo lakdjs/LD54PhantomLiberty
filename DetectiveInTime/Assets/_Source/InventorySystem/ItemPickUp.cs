@@ -4,9 +4,10 @@ namespace InventorySystem
 {
     public class ItemPickUp 
     {
-        public void PickUp(Item item,Inventory inventory)
+        public void PickUp(Item item,Inventory inventory,string name)
         {
-            inventory.AddItemInInventory(item);
+            item.ItemName = name;
+            inventory.AddItemInInventory(item,name);
         }
 
         public void Drop(Item item, Inventory inventory)

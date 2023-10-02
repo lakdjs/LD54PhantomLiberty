@@ -14,18 +14,11 @@ namespace InventorySystem
         [SerializeField] private Player player;
         public List<Item> InventoryItems { get; private set; } = new List<Item>();
 
-        private void Start()
-        {
-            foreach (var item in startItems)
-            {
-                AddItemInInventory(item);
-            }
-        }
-
-        public void AddItemInInventory(Item item)
+        public void AddItemInInventory(Item item,string name)
         {
             if (InventoryItems.Count <= maxInventorySize-1)
             {
+                item.ItemName = name;
                 InventoryItems.Add(item);
                 OnItemAdded?.Invoke(item);
             }
