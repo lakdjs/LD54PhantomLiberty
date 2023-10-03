@@ -1,18 +1,20 @@
-using System;
 using InventorySystem;
 using PlayerSystem;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class LVLUp : MonoBehaviour
 {
     [SerializeField] private Inventory inventory;
+    [SerializeField] private Image inventoryBG;
     [SerializeField] private Player player;
     [SerializeField] private int demandEvidenceQuantity;
     [SerializeField] private int demandKeysQuantity;
     [SerializeField] private TMP_Text door;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private KeyCode interactDoorCode;
+    [SerializeField] private GameObject monologue;
     [field: SerializeField] public Transform teleportToPosition { get; set; }
     private bool _isReadyForLvl;
 
@@ -20,6 +22,7 @@ public class LVLUp : MonoBehaviour
     {
         _isReadyForLvl = false;
         door.gameObject.SetActive(false);
+        monologue.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -36,6 +39,11 @@ public class LVLUp : MonoBehaviour
             {
                 player.transform.position = teleportToPosition.position;
             }
+            else
+            {
+                monologue.gameObject.SetActive(true);
+                inventoryBG.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -44,6 +52,8 @@ public class LVLUp : MonoBehaviour
         if ((playerLayer & (1 << other.gameObject.layer)) != 0)
         {
             door.gameObject.SetActive(false); 
+            monologue.gameObject.SetActive(false);
+            inventoryBG.gameObject.SetActive(true);
         }
     }
 

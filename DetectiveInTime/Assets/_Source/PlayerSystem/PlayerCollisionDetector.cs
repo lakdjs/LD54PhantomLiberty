@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using InventorySystem;
 using UnityEngine;
-using InventorySystem;
 using Unity.VisualScripting;
 
 namespace PlayerSystem
@@ -10,7 +8,6 @@ namespace PlayerSystem
     public class PlayerCollisionDetector : MonoBehaviour
     {
         [SerializeField] private LayerMask _itemLayerMask;
-        [SerializeField] private LayerMask _evidenceMask;
         [SerializeField] private LayerMask _doorLvlMask;
         [SerializeField] private Inventory inventory;
         private PlayerInvoker _playerInvoker;
@@ -57,7 +54,7 @@ namespace PlayerSystem
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Evidence"))//(_evidenceMask & (1 << other.gameObject.layer)) != 0)
+            if (other.CompareTag("Evidence"))
             {
                 Destroy(other.gameObject);
                 gameObject.GetComponent<Evidence>().AddEvidence();

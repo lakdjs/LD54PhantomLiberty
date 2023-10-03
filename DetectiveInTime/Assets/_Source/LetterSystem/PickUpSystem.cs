@@ -27,13 +27,13 @@ namespace LetterSystem
             
                 if (_isActivated)
                 {
-                    textMesh.gameObject.SetActive(true);
+                    textMesh.gameObject.SetActive(false);
                     imageToDisable.gameObject.SetActive(true);
                     inventory.gameObject.SetActive(false);
                 }
                 else
                 {
-                    textMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(true);
                     imageToDisable.gameObject.SetActive(false);
                     inventory.gameObject.SetActive(true);
                 }
