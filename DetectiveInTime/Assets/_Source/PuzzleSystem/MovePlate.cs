@@ -1,10 +1,12 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PuzzleSystem
 {
     public class MovePlate : MonoBehaviour
     {
+        private GameObject _cameraChess;
         private GameObject _controller;
         
         private GameObject _reference = null;
@@ -20,6 +22,7 @@ namespace PuzzleSystem
 
         public void Start()
         {
+            _cameraChess = FindObjectOfType<CameraActivation>().GameObject();
             _controller = GameObject.FindGameObjectWithTag("GameController");
             if (attack)
             {
@@ -32,12 +35,6 @@ namespace PuzzleSystem
            // _controller = GameObject.FindGameObjectWithTag("GameController");
             ChessMan chessMan = _reference.GetComponent<ChessMan>();
             GameChess gameChess = _controller.GetComponent<GameChess>();
-            if (attack)
-            {
-                
-                
-            }
-
             
             if (chessMan.name == "white_bishop" && _matrixX == 5 && _matrixY == 6 && attack)
             {
@@ -55,6 +52,8 @@ namespace PuzzleSystem
                 gameChess.SetPosition(_reference);
             
                 chessMan.DestroyMovePlates();
+                _cameraChess.GetComponent<CameraActivation>().SwitchCameras();
+                Destroy(_controller);
             }
             else
             {

@@ -65,6 +65,7 @@ namespace PuzzleSystem
         public GameObject Create(string name, int x, int y)
         {
             GameObject obj = Instantiate(_chesspiece, new Vector3(0, 0, -1), Quaternion.identity);
+            obj.transform.SetParent(gameObject.transform);
             ChessMan cm = obj.GetComponent<ChessMan>();
             cm.name = name;
             cm.SetXBoard(x);
