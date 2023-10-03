@@ -26,8 +26,8 @@ namespace Pause_Menu
             {
                 _musicsFloat = 0.25f;
                 _soundEffectsFloat = 0.75f;
-                musicSlider.value = _musicsFloat;
-                soundEffectSlider.value = _soundEffectsFloat;
+                //musicSlider.value = _musicsFloat;
+                //soundEffectSlider.value = _soundEffectsFloat;
                 PlayerPrefs.SetFloat(MusicPref,_musicsFloat);
                 PlayerPrefs.SetFloat(SoundEffectsPref, _soundEffectsFloat);
                 PlayerPrefs.SetInt(FirstPlay, -1);
