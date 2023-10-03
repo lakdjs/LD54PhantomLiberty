@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: 0
+  key: {fileID: 11400000, guid: e9625670ede7a224199c3a1659713f4c, type: 2}
 --- !u!61 &4185728532207936133
 BoxCollider2D:
   m_ObjectHideFlags: 0

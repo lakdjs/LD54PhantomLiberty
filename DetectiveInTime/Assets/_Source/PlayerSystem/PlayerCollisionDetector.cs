@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using InventorySystem;
 using UnityEngine;
 using InventorySystem;
+using Unity.VisualScripting;
+
 namespace PlayerSystem
 {
     public class PlayerCollisionDetector : MonoBehaviour
@@ -12,12 +14,27 @@ namespace PlayerSystem
         [SerializeField] private LayerMask _doorLvlMask;
         [SerializeField] private Inventory inventory;
         private PlayerInvoker _playerInvoker;
+        private GameObject _colDoor;
+        private bool _isReady;
         private Item _col;
         private GameObject _colObj;
         private List<GameObject> _colObjs = new List<GameObject>();
         private void Update()
         {
             PickingUp();
+           
+            if (_isReady && Input.GetKeyDown(KeyCode.E))
+            {
+                gameObject.transform.position = _colDoor.GetComponent<LVLUp>().teleportToPosition.position;
+                foreach (Item item in inventory.InventoryItems)
+                {
+                    if (item.ToString() == "Key")
+                    {
+                        inventory.DeleteItemFromInventory(item);
+                        return;
+                    }
+                }
+            }
         }
         private void PickingUp()
         {
@@ -40,29 +57,12 @@ namespace PlayerSystem
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.name == "Evidence")//(_evidenceMask & (1 << other.gameObject.layer)) != 0)
+            if (other.CompareTag("Evidence"))//(_evidenceMask & (1 << other.gameObject.layer)) != 0)
             {
                 Destroy(other.gameObject);
                 gameObject.GetComponent<Evidence>().AddEvidence();
-                Debug.Log(gameObject.GetComponent<Evidence>().QuantityOfEvidence);
             }
-
-            if  ((_doorLvlMask & (1 << other.gameObject.layer)) != 0)
-            {
-                bool isready = other.GetComponent<LVLUp>().CheckForReady();
-                if (isready)
-                {
-                    gameObject.transform.position = other.GetComponent<LVLUp>().teleportToPosition.position;
-                    foreach (Item item in inventory.InventoryItems)
-                    {
-                        if (item.ToString() == "Key")
-                        {
-                            inventory.DeleteItemFromInventory(item);
-                            return;
-                        }
-                    }
-                }
-            }
+            
         }
         private void OnTriggerStay2D(Collider2D other)
         {
@@ -75,6 +75,11 @@ namespace PlayerSystem
                     _colObj = other.gameObject;
                 }
             }
+            if  ((_doorLvlMask & (1 << other.gameObject.layer)) != 0)
+            {
+                _colDoor = other.GameObject();
+                _isReady = _colDoor.GetComponent<LVLUp>().CheckForReady();
+            }
         }
         private void OnTriggerExit2D(Collider2D other)
         {
@@ -86,6 +91,11 @@ namespace PlayerSystem
                     _col = null;
                     _colObj = null;
                 }
+            }
+            if  ((_doorLvlMask & (1 << other.gameObject.layer)) != 0)
+            {
+                _colDoor = null;
+                _isReady = false;   
             }
         }
     }

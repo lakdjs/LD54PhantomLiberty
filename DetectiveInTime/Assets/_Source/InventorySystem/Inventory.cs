@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using PlayerSystem;
+using PuzzleSystem;
 using UnityEngine;
 
 namespace InventorySystem
@@ -12,8 +13,10 @@ namespace InventorySystem
         [SerializeField] private List<Item> startItems = new List<Item>();
         [SerializeField] private int maxInventorySize;
         [SerializeField] private Player player;
+        [SerializeField] private Item key;
+        [SerializeField] private MovePlate movePlate;
         public List<Item> InventoryItems { get; private set; } = new List<Item>();
-
+        
         private void Update()
         {
             foreach (Item item in InventoryItems)
@@ -29,7 +32,7 @@ namespace InventorySystem
                 AddItemInInventory(item);
             }
         }
-
+        
         public void AddItemInInventory(Item item)
         {
             if (InventoryItems.Count <= maxInventorySize-1)

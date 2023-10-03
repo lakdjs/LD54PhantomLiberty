@@ -1,4 +1,5 @@
 ﻿using System;
+using InventorySystem;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,6 +7,14 @@ namespace PuzzleSystem
 {
     public class MovePlate : MonoBehaviour
     {
+        public Action<bool> OnChessGameFinish;
+        public bool attack = false;
+        
+        [SerializeField] private Item key;
+        private Inventory _inventory;
+
+        private InventoryUI _mainCanvas;
+        
         private GameObject _cameraChess;
         private GameObject _controller;
         
@@ -13,15 +22,16 @@ namespace PuzzleSystem
         
         private int _matrixX;
         private int _matrixY;
-        
-        public bool attack = false;
 
+        
         private void Update()
         {
         }
 
         public void Start()
         {
+            _inventory = FindObjectOfType<Inventory>();
+            _mainCanvas = FindObjectOfType<InventoryUI>();
             _cameraChess = FindObjectOfType<CameraActivation>().GameObject();
             _controller = GameObject.FindGameObjectWithTag("GameController");
             if (attack)
@@ -54,6 +64,9 @@ namespace PuzzleSystem
                 chessMan.DestroyMovePlates();
                 _cameraChess.GetComponent<CameraActivation>().SwitchCameras();
                 Destroy(_controller);
+                OnChessGameFinish?.Invoke(true);
+                _inventory.AddItemInInventory(key);
+                _mainCanvas.GameObject().SetActive(true);
             }
             else
             {
