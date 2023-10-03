@@ -23,6 +23,7 @@ namespace PlayerSystem
             if (_isReady && Input.GetKeyDown(KeyCode.E))
             {
                 gameObject.transform.position = _colDoor.GetComponent<LVLUp>().teleportToPosition.position;
+                _colDoor.GetComponent<BoxCollider2D>().enabled = false;
                 foreach (Item item in inventory.InventoryItems)
                 {
                     if (item.ToString() == "Key")

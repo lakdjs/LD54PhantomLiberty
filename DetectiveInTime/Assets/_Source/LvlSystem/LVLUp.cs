@@ -22,7 +22,11 @@ public class LVLUp : MonoBehaviour
     {
         _isReadyForLvl = false;
         door.gameObject.SetActive(false);
-        monologue.gameObject.SetActive(false);
+        
+        if (monologue != null)
+        {
+            monologue.gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -41,7 +45,10 @@ public class LVLUp : MonoBehaviour
             }
             else
             {
-                monologue.gameObject.SetActive(true);
+                if (monologue != null && CheckForReady() == false)
+                {
+                    monologue.gameObject.SetActive(true); 
+                }
                 inventoryBG.gameObject.SetActive(false);
             }
         }
@@ -51,9 +58,12 @@ public class LVLUp : MonoBehaviour
     {
         if ((playerLayer & (1 << other.gameObject.layer)) != 0)
         {
-            door.gameObject.SetActive(false); 
-            monologue.gameObject.SetActive(false);
+            door.gameObject.SetActive(false);
             inventoryBG.gameObject.SetActive(true);
+            if (monologue != null)
+            {
+                monologue.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -68,7 +78,7 @@ public class LVLUp : MonoBehaviour
             }
         }
 
-        if (player.GetComponent<Evidence>().QuantityOfEvidence == demandEvidenceQuantity &&
+        if (player.GetComponent<Evidence>().QuantityOfEvidence >= demandEvidenceQuantity &&
             realKeysQuantity >= demandKeysQuantity)
         {
             _isReadyForLvl = true;
