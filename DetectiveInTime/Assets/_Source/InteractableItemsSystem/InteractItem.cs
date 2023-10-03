@@ -8,20 +8,27 @@ namespace InteractableItemsSystem
     {
         [SerializeField] private TMP_Text itemText;
         [SerializeField] private string itemName;
+        [SerializeField] private LayerMask playerLayer;
         private void Start()
         {
             itemText.gameObject.SetActive(false);
             itemText.text = itemName;
         }
 
-        private void OnMouseOver()
+        private void OnTriggerStay2D(Collider2D other)
         {
-            itemText.gameObject.SetActive(true);
+            if ((playerLayer & (1 << other.gameObject.layer)) != 0)
+            {
+                itemText.gameObject.SetActive(true); 
+            }
         }
-
-        private void OnMouseExit()
+        
+        private void OnTriggerExit2D(Collider2D other)
         {
-            itemText.gameObject.SetActive(false);
+            if ((playerLayer & (1 << other.gameObject.layer)) != 0)
+            {
+                itemText.gameObject.SetActive(false); 
+            }
         }
     }
 }

@@ -10,21 +10,9 @@ namespace InventorySystem
     {
         public Action<Item> OnItemAdded;
         public Action<Item> OnItemDeleted;
+        public List<Item> InventoryItems { get; private set; } = new List<Item>();
         [SerializeField] private List<Item> startItems = new List<Item>();
         [SerializeField] private int maxInventorySize;
-        [SerializeField] private Player player;
-        [SerializeField] private Item key;
-        [SerializeField] private MovePlate movePlate;
-        public List<Item> InventoryItems { get; private set; } = new List<Item>();
-        
-        private void Update()
-        {
-            foreach (Item item in InventoryItems)
-            {
-                Debug.Log(item.ToString());
-            }
-        }
-
         private void Start()
         {
             foreach (var item in startItems)

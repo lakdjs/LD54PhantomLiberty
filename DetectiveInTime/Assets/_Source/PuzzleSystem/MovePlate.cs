@@ -66,7 +66,7 @@ namespace PuzzleSystem
                 Destroy(_controller);
                 OnChessGameFinish?.Invoke(true);
                 _inventory.AddItemInInventory(key);
-                _mainCanvas.GameObject().SetActive(true);
+                //_mainCanvas.GameObject().SetActive(true);
             }
             else
             {
