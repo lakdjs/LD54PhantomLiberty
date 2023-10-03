@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Pause_Menu
 {
@@ -20,7 +21,9 @@ namespace Pause_Menu
                 panel.SetActive(false);
                 _isPaused = false;
                 Time.timeScale = 1;
+                
             }
+            
         }
     }
 }
