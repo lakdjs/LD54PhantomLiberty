@@ -27,6 +27,7 @@ namespace InteractableItemsSystem
         {
             if ((playerLayer & (1 << other.gameObject.layer)) != 0)
             {
+
                 itemText.gameObject.SetActive(false); 
             }
         }

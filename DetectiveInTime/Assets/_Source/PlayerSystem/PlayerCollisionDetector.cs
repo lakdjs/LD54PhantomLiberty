@@ -22,17 +22,26 @@ namespace PlayerSystem
         {
             PickingUp();
            
-            if (_isReady && Input.GetKeyDown(KeyCode.E))
+            if (_isReady) 
             {
-                gameObject.transform.position = _colDoor.GetComponent<LVLUp>().teleportToPosition.position;
-                _colDoor.GetComponent<BoxCollider2D>().enabled = false;
-                foreach (Item item in inventory.InventoryItems)
+                LVLUp door = _colDoor.GetComponent<LVLUp>();
+                if (Input.GetKeyDown(door.InteractDoorCode))
                 {
-                    if (item.ToString() == "Key")
-                    {
-                        inventory.DeleteItemFromInventory(item);
-                        return;
-                    }
+                     gameObject.transform.position = door.TeleportToPosition.position;
+                     if (door.MusicSourceOff != null)
+                     {
+                         Destroy(door.MusicSourceOff); 
+                         door.MusicSourceOn.Play();
+                     }
+                     _colDoor.GetComponent<BoxCollider2D>().enabled = false;
+                     foreach (Item item in inventory.InventoryItems)
+                     {
+                         if (item.ToString() == "Key")
+                         {
+                             inventory.DeleteItemFromInventory(item);
+                             return;
+                         }
+                     }
                 }
             }
         }
