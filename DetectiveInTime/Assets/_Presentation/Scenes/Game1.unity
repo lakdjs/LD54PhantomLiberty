@@ -8172,7 +8172,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 9c0b31b456d95db45827df40b8c7ae2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -29548,6 +29548,14 @@ PrefabInstance:
       propertyPath: <MusicSourceOff>k__BackingField
       value: 
       objectReference: {fileID: 7283260}
+    - target: {fileID: 1949876951516098374, guid: efac635f84b81354da5946a6614f22c3, type: 3}
+      propertyPath: <InteractDoorCode>k__BackingField
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949876951516098374, guid: efac635f84b81354da5946a6614f22c3, type: 3}
+      propertyPath: <TeleportToPosition>k__BackingField
+      value: 
+      objectReference: {fileID: 1649271432}
     - target: {fileID: 1949876951516098374, guid: efac635f84b81354da5946a6614f22c3, type: 3}
       propertyPath: <teleportToPosition>k__BackingField
       value: 
