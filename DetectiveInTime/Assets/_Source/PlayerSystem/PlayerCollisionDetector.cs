@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using InventorySystem;
+using SoundSystem;
 using UnityEngine;
 using Unity.VisualScripting;
 
@@ -11,6 +12,8 @@ namespace PlayerSystem
         [SerializeField] private LayerMask _doorLvlMask;
         [SerializeField] private LayerMask evidenceMask;
         [SerializeField] private Inventory inventory;
+        [SerializeField] private Sounds itemObtainingSound;
+        [SerializeField] private Sounds doorOpening;
         private PlayerInvoker _playerInvoker;
         private GameObject _colDoor;
         private bool _isReady;
@@ -28,6 +31,7 @@ namespace PlayerSystem
                 if (Input.GetKeyDown(door.InteractDoorCode))
                 {
                      gameObject.transform.position = door.TeleportToPosition.position;
+                     doorOpening.PlaySound();
                      if (door.MusicSourceOff != null)
                      {
                          Destroy(door.MusicSourceOff); 
@@ -54,6 +58,7 @@ namespace PlayerSystem
                     _playerInvoker.PickUp(_col);
                     _colObjs.Add(_colObj);
                     Destroy(_colObj);
+                    itemObtainingSound.PlaySound();
                 }
             }
         }

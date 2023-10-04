@@ -1,6 +1,5 @@
-using System;
-using InventorySystem;
 using PlayerSystem;
+using SoundSystem;
 using UnityEngine;
 
 namespace InputSystem
@@ -9,6 +8,7 @@ namespace InputSystem
     {
         [SerializeField] private Player player;
         [SerializeField] private PlayerCollisionDetector playerCollisionDetector;
+        [SerializeField] private Sounds footSteps;
         private PlayerInvoker _playerInvoker;
         private const string Horizontal = "Horizontal";
         private const string Vertical = "Vertical";
@@ -33,6 +33,7 @@ namespace InputSystem
             Vector2 moveDirection = new Vector3(horizontal, vertical );
             _playerInvoker.Move(moveDirection);
             animator.SetBool("isWalking", moveDirection.magnitude >= 0.4);
+            footSteps.PlaySound();
         }
     }
 }

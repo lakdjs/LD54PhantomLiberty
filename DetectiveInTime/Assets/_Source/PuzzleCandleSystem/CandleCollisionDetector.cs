@@ -8,6 +8,8 @@ namespace PuzzleCandleSystem
     {
         [SerializeField] private LayerMask candleShelfLayer;
         [SerializeField] private Inventory inventory;
+        [SerializeField] private Candle candle;
+        [SerializeField] private Item key;
         private GameObject _candleCollision;
         private Candle _candle;
         private void Update()
@@ -22,6 +24,8 @@ namespace PuzzleCandleSystem
                        if (item.ToString() == "Candle")
                        {
                            inventory.DeleteItemFromInventory(item);
+                           candle.PutCandle();
+                           inventory.AddItemInInventory(key);
                            return;
                        }
                    }

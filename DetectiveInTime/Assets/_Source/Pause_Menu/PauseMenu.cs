@@ -1,11 +1,12 @@
+using SoundSystem;
 using UnityEngine;
-using UnityEngine.Audio;
-
 namespace Pause_Menu
 {
-    public class Pause_Menu : MonoBehaviour
+    public class PauseMenu : MonoBehaviour
     {
         [SerializeField] private GameObject panel;
+        [SerializeField] private Sounds bookOpening;
+        [SerializeField] private Sounds bookClosing;
         private bool _isPaused = false;
 
         void Update()
@@ -15,13 +16,14 @@ namespace Pause_Menu
                 panel.SetActive(true);
                 _isPaused = true;
                 Time.timeScale = 0;
+                bookOpening.PlaySound();
             }
             else if (Input.GetKeyDown(KeyCode.Escape) && _isPaused == true)
             {
                 panel.SetActive(false);
                 _isPaused = false;
                 Time.timeScale = 1;
-                
+                bookClosing.PlaySound();
             }
             
         }

@@ -4,11 +4,12 @@ namespace PuzzleCandleSystem
 {
     public class Candle : MonoBehaviour
     {
-        [field: SerializeField] public bool hasCandle { get; private set; } = false;
+        [SerializeField] private SpriteRenderer candle;
+        [SerializeField] private Sprite fullCandle;
 
         public void PutCandle()
         {
-            hasCandle = true;
+            candle.sprite = fullCandle;
         }
     }
 }
