@@ -79,7 +79,10 @@ public class LVLUp : MonoBehaviour
                 realKeysQuantity++;
             }
 
-            if (item.ToString() == "Fragment")
+            if (item.ToString() == "Fragment" &&
+                item.ToString() == "Fragment2" &&
+                item.ToString() == "Fragment3" &&
+                item.ToString() == "Fragment4")
             {
                 realFragmentQuantity++;
             }
