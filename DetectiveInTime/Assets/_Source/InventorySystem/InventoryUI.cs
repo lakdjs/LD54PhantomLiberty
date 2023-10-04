@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using PuzzleSystem;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +10,24 @@ namespace InventorySystem
         [SerializeField] private Inventory inventory;
         [SerializeField] private RectTransform[] itemsPanels;
         [SerializeField] private Sprite inventorySprite;
+        [SerializeField] private Sprite inventorySprite2;
         private List<GameObject> _drawnItems = new List<GameObject>(); 
         private void Start()
         {
             inventory.OnItemAdded += OnItemAdded;
             inventory.OnItemDeleted += OnItemDeleted;
             Redraw();
-            foreach (var i in itemsPanels)
+
+            for (int i = 0; i < itemsPanels.Length; i++)
             {
-                i.gameObject.AddComponent<Image>().sprite = inventorySprite;
+                if (i % 2 == 0)
+                {
+                    itemsPanels[i].AddComponent<Image>().sprite = inventorySprite;
+                }
+                else
+                {
+                    itemsPanels[i].AddComponent<Image>().sprite = inventorySprite2;
+                }
             }
         }
 

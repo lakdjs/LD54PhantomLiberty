@@ -8,7 +8,16 @@ namespace FinalPuzzleSystem
         [SerializeField] private LayerMask playerLayer;
         [SerializeField] private KeyCode codeToFinalPuzzle;
         [SerializeField] private GameObject inventory;
+        [SerializeField] private GameObject puzzleCamera;
+        [SerializeField] private Camera nowCamera;
+        [SerializeField] private BoxCollider2D box; 
         private GameObject _playerCol;
+
+        private void Start()
+        {
+            puzzleCamera.SetActive(false);
+        }
+
         private void Update()
         {
             if (_playerCol != null)
@@ -16,7 +25,10 @@ namespace FinalPuzzleSystem
                 if (Input.GetKeyDown(codeToFinalPuzzle))
                 {
                     Debug.Log("Start");
+                    nowCamera.enabled = false;
+                    puzzleCamera.SetActive(true);
                     inventory.SetActive(false);
+                    box.enabled = false;
                 }
             }
         }
