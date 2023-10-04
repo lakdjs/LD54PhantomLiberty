@@ -34,8 +34,8 @@ namespace PlayerSystem
                      doorOpening.PlaySound();
                      if (door.MusicSourceOff != null)
                      {
-                         Destroy(door.MusicSourceOff); 
                          door.MusicSourceOn.Play();
+                         door.MusicSourceOff.Stop();
                      }
                      _colDoor.GetComponent<BoxCollider2D>().enabled = false;
                      foreach (Item item in inventory.InventoryItems)

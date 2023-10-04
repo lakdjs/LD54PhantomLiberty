@@ -33,7 +33,6 @@ namespace InputSystem
             Vector2 moveDirection = new Vector3(horizontal, vertical );
             _playerInvoker.Move(moveDirection);
             animator.SetBool("isWalking", moveDirection.magnitude >= 0.4);
-            footSteps.PlaySound();
         }
     }
 }

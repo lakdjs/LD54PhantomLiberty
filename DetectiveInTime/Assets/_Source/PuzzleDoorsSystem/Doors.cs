@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using InventorySystem;
-using PlayerSystem;
+using SoundSystem;
 using UnityEngine;
 
 namespace PuzzleDoorsSystem
@@ -15,6 +15,7 @@ namespace PuzzleDoorsSystem
         [SerializeField] private Transform[] roomTeleportPos;
         [SerializeField] private Item key;
         [SerializeField] private Inventory inventory;
+        [SerializeField] private Sounds doorOpening;
         private List<int> _playerCipher = new List<int>();
         private Action<int> _onDoorOpen;
 
@@ -50,11 +51,13 @@ namespace PuzzleDoorsSystem
                     {
                         Debug.Log("Lost");
                         playerPos.position = startTeleportPos.position;
+                        doorOpening.PlaySound();
                         _playerCipher.Clear();
                         return;
                     }
                 }
                 playerPos.position = finishTeleportPos.position;
+                doorOpening.PlaySound();
                 inventory.AddItemInInventory(key);
                 Debug.Log("Won");
             }
@@ -66,10 +69,12 @@ namespace PuzzleDoorsSystem
                     {
                         Debug.Log("Lost");
                         playerPos.position = startTeleportPos.position;
+                        doorOpening.PlaySound();
                         _playerCipher.Clear();
                         return;
                     }
                     playerPos.position = roomTeleportPos[_playerCipher.Count-1].position;
+                    doorOpening.PlaySound();
                 }
             }
         }
