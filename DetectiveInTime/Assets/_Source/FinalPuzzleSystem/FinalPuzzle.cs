@@ -14,11 +14,23 @@ namespace FinalPuzzleSystem
         private Collider2D _dropZone; 
         private bool _isInsideDropZone = false;
 
+        private void Update()
+        {
+            if (_isInsideDropZone)
+            {
+                gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                transform.position = new Vector3(_dropZone.transform.position.x, _dropZone.transform.position.y, transform.position.z);
+            }
+        }
+
         private void OnMouseDown()
         {
-            _offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            _isDragging = true;
-            _isInsideDropZone = false;
+            if (_isInsideDropZone==false)
+            {
+                _offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                _isDragging = true;
+                _isInsideDropZone = false;
+            }
         }
 
         private void OnMouseDrag()
@@ -46,7 +58,6 @@ namespace FinalPuzzleSystem
                 _dropZone = other;
                 _isInsideDropZone = true;
                 IsInRightHole = true;
-                Debug.Log("AAAAp nu davay");
                 OnFragmentAdded?.Invoke(true);
             }
         }
@@ -55,8 +66,11 @@ namespace FinalPuzzleSystem
         {
             if (other.CompareTag("DropZone"))
             {
-                _dropZone = null;
-                _isInsideDropZone = false;
+                if (gameObject.GetComponent<CircleCollider2D>().enabled)
+                {
+                    _dropZone = null;
+                    _isInsideDropZone = false;
+                }
             }
         }
     }

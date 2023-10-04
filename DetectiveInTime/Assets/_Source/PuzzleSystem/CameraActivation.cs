@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraActivation : MonoBehaviour
+namespace PuzzleSystem
 {
-    [SerializeField] private Camera mainCamera;
-    private Camera cam;
-    void Start()
+    public class CameraActivation : MonoBehaviour
     {
-        cam = GetComponent<Camera>();
-        cam.enabled = false;   
-    }
+        [SerializeField] private Camera mainCamera;
+        private Camera cam;
+        void Start()
+        {
+            cam = GetComponent<Camera>();
+            cam.enabled = false;   
+        }
 
-    public void SwitchCameras()
-    {
-        cam.enabled = !cam.enabled;
-        mainCamera.enabled = !mainCamera.enabled;
+        public void SwitchCameras()
+        {
+            cam.enabled = !cam.enabled;
+            mainCamera.enabled = !mainCamera.enabled;
+        }
     }
 }
