@@ -7,18 +7,19 @@ namespace Pause_Menu
         [SerializeField] private GameObject panel;
         [SerializeField] private Sounds bookOpening;
         [SerializeField] private Sounds bookClosing;
+        [SerializeField] private KeyCode codeToPause;
         private bool _isPaused = false;
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && _isPaused == false)
+            if (Input.GetKeyDown(codeToPause) && _isPaused == false)
             {
                 panel.SetActive(true);
                 _isPaused = true;
                 Time.timeScale = 0;
                 bookOpening.PlaySound();
             }
-            else if (Input.GetKeyDown(KeyCode.Escape) && _isPaused == true)
+            else if (Input.GetKeyDown(codeToPause) && _isPaused)
             {
                 panel.SetActive(false);
                 _isPaused = false;

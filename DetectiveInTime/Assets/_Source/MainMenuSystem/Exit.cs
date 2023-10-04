@@ -6,7 +6,7 @@ namespace MainMenuSystem
     {
         public void QuitGame()
         {
-            UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();
         }
     }
 }

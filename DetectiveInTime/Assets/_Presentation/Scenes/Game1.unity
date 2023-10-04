@@ -25003,6 +25003,7 @@ MonoBehaviour:
   panel: {fileID: 1912484471}
   bookOpening: {fileID: 1866673839}
   bookClosing: {fileID: 866045446}
+  codeToPause: 112
 --- !u!1 &1718437205
 GameObject:
   m_ObjectHideFlags: 0
