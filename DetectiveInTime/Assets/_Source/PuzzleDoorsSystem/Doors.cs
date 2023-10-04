@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using InventorySystem;
+using PlayerSystem;
 using UnityEngine;
 
 namespace PuzzleDoorsSystem
@@ -7,6 +9,12 @@ namespace PuzzleDoorsSystem
     public class Doors : MonoBehaviour
     {
         [SerializeField] private int[] finalCipher;
+        [SerializeField] private Transform playerPos;
+        [SerializeField] private Transform startTeleportPos;
+        [SerializeField] private Transform finishTeleportPos;
+        [SerializeField] private Transform[] roomTeleportPos;
+        [SerializeField] private Item key;
+        [SerializeField] private Inventory inventory;
         private List<int> _playerCipher = new List<int>();
         private Action<int> _onDoorOpen;
 
@@ -23,7 +31,7 @@ namespace PuzzleDoorsSystem
             }
         }
 
-        void OnDoorOpen(int i) => FinsihThePuzzle();
+        void OnDoorOpen(int i) => CheckCipher();
         
         public void AddNumberInCipher(int number)
         {
@@ -32,24 +40,37 @@ namespace PuzzleDoorsSystem
             _onDoorOpen?.Invoke(number);
         }
 
-        private void FinsihThePuzzle()
+        private void CheckCipher()
         {
             if (_playerCipher.Count == finalCipher.Length)
             {
-                Debug.Log("Full cipher");
                 for (int i = 0; i < finalCipher.Length; i++)
                 {
                     if (finalCipher[i] != _playerCipher[i])
                     {
                         Debug.Log("Lost");
+                        playerPos.position = startTeleportPos.position;
+                        _playerCipher.Clear();
                         return;
                     }
                 }
+                playerPos.position = finishTeleportPos.position;
+                inventory.AddItemInInventory(key);
                 Debug.Log("Won");
             }
             else
             {
-                Debug.Log("not full cipher");
+                for (int i = 0; i < _playerCipher.Count; i++)
+                {
+                    if (finalCipher[i] != _playerCipher[i])
+                    {
+                        Debug.Log("Lost");
+                        playerPos.position = startTeleportPos.position;
+                        _playerCipher.Clear();
+                        return;
+                    }
+                    playerPos.position = roomTeleportPos[_playerCipher.Count-1].position;
+                }
             }
         }
     }

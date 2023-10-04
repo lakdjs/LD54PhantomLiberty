@@ -9,6 +9,7 @@ namespace PlayerSystem
     {
         [SerializeField] private LayerMask _itemLayerMask;
         [SerializeField] private LayerMask _doorLvlMask;
+        [SerializeField] private LayerMask evidenceMask;
         [SerializeField] private Inventory inventory;
         private PlayerInvoker _playerInvoker;
         private GameObject _colDoor;
@@ -16,6 +17,7 @@ namespace PlayerSystem
         private Item _col;
         private GameObject _colObj;
         private List<GameObject> _colObjs = new List<GameObject>();
+        private GameObject _evidence;
         private void Update()
         {
             PickingUp();
@@ -55,12 +57,11 @@ namespace PlayerSystem
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Evidence"))
+            if ((evidenceMask & (1 << other.gameObject.layer)) != 0)
             {
                 Destroy(other.gameObject);
                 gameObject.GetComponent<Evidence>().AddEvidence();
             }
-            
         }
         private void OnTriggerStay2D(Collider2D other)
         {
@@ -77,6 +78,11 @@ namespace PlayerSystem
             {
                 _colDoor = other.GameObject();
                 _isReady = _colDoor.GetComponent<LVLUp>().CheckForReady();
+            }
+            if ((evidenceMask & (1 << other.gameObject.layer)) != 0)
+            {
+                Destroy(other.gameObject);
+                gameObject.GetComponent<Evidence>().AddEvidence();
             }
         }
         private void OnTriggerExit2D(Collider2D other)

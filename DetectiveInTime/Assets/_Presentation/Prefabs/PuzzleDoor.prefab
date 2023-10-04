@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4340856908763701191}
   - component: {fileID: 7133593610724267499}
   - component: {fileID: 2398966024025580074}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 1839361840260290478}
   - component: {fileID: 4382956205803534033}
   - component: {fileID: 297159709589621869}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PuzzleDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 6489744379732335291}
   - component: {fileID: 3289060193271768608}
   - component: {fileID: 846097456334729129}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Door TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}

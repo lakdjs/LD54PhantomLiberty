@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1682154966874414321}
   - component: {fileID: 1682154966874414327}
   - component: {fileID: 7679780577423638311}
+  - component: {fileID: 2370198816986926952}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -142,7 +143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startItems: []
   maxInventorySize: 5
-  player: {fileID: 0}
 --- !u!114 &1682154966874414327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +155,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb12d229a0a79747b519c697fb03996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _doorLvlMask:
+    serializedVersion: 2
+    m_Bits: 0
+  inventory: {fileID: 0}
 --- !u!114 &7679780577423638311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,3 +174,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be450f02a46289e44bf7b9674e76b5d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2370198816986926952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682154966874414316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ff643ad01eeee45a0961595a0ebf1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorsMask:
+    serializedVersion: 2
+    m_Bits: 0
+  doors: {fileID: 0}

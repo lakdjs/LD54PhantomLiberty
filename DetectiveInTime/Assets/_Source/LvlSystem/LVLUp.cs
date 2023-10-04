@@ -11,6 +11,7 @@ public class LVLUp : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private int demandEvidenceQuantity;
     [SerializeField] private int demandKeysQuantity;
+    [SerializeField] private int demandFragmentQuantity;
     [SerializeField] private TMP_Text door;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private KeyCode interactDoorCode;
@@ -70,16 +71,23 @@ public class LVLUp : MonoBehaviour
     public bool CheckForReady()
     {
         int realKeysQuantity = 0;
+        int realFragmentQuantity = 0;
         foreach (Item item in inventory.InventoryItems)
         {
             if (item.ToString() == "Key")
             {
                 realKeysQuantity++;
             }
+
+            if (item.ToString() == "Fragment")
+            {
+                realFragmentQuantity++;
+            }
         }
 
         if (player.GetComponent<Evidence>().QuantityOfEvidence >= demandEvidenceQuantity &&
-            realKeysQuantity >= demandKeysQuantity)
+            realKeysQuantity >= demandKeysQuantity &&
+            realFragmentQuantity >= demandFragmentQuantity)
         {
             _isReadyForLvl = true;
         }
